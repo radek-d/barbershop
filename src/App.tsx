@@ -1,4 +1,5 @@
 import { Suspense, lazy } from 'react';
+import { motion } from 'framer-motion';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { Button } from './components/ui/Button';
 import { Scissors, Clock, Star } from 'lucide-react';
@@ -29,16 +30,26 @@ function App() {
           <Route
             path="/"
             element={
-            <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black p-4">
-              <div className="max-w-4xl w-full text-center space-y-12">
+            <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black p-4 selection:bg-black selection:text-white">
+              {/* Subtle Ambient Background */}
+              <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0">
+                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#000_1px,transparent_1px)] bg-[length:24px_24px]"></div>
+              </div>
+
+              <div className="max-w-4xl w-full text-center space-y-12 relative z-10">
                 {/* Hero Section */}
                 <div className="space-y-6">
                   <div className="inline-block">
                     <Scissors className="w-20 h-20 mx-auto mb-6" strokeWidth={1.5} />
                   </div>
-                  <h1 className="text-7xl md:text-8xl lg:text-9xl font-display uppercase tracking-tight text-balance leading-none">
+                  <motion.h1 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="text-7xl md:text-8xl lg:text-9xl font-display uppercase tracking-tight text-balance leading-none"
+                  >
                     Dziupla<br/>Barbershop
-                  </h1>
+                  </motion.h1>
                   <div className="w-24 h-1 bg-black mx-auto"></div>
                   <p className="text-xl md:text-2xl font-light max-w-2xl mx-auto text-gray-700">
                     Tradycyjne rzemiosło fryzjerskie w nowoczesnym wydaniu
@@ -67,8 +78,12 @@ function App() {
                 {/* CTA */}
                 <div className="space-y-6">
                   <Link to="/booking">
-                    <Button size="lg" className="text-xl px-12 py-6 h-auto">
-                      Zarezerwuj wizytę
+                    <Button 
+                      size="lg" 
+                      className="text-xl px-12 py-6 h-auto group relative overflow-hidden transition-all hover:scale-105 active:scale-95"
+                    >
+                      <span className="relative z-10">Zarezerwuj wizytę</span>
+                      <div className="absolute inset-0 bg-gray-800 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                     </Button>
                   </Link>
                   <div className="text-sm text-gray-500">
