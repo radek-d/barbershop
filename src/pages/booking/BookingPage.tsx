@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { formatPhoneDisplay } from '../../utils/formatPhone';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../../lib/supabase';
@@ -224,7 +225,7 @@ export default function BookingPage() {
             Twoja wizyta w Dziupla Barbershop została zarezerwowana.
           </p>
           <p className="text-sm text-gray-500">
-            Potwierdzenie wysłane na {clientPhone}
+            Link do potwierdzenia został wysłany na numer {formatPhoneDisplay(clientPhone)}
           </p>
         </motion.div>
       </div>
