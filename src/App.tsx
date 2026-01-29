@@ -28,6 +28,19 @@ function App() {
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route
+            path="*"
+            element={
+              <div className="min-h-screen flex flex-col items-center justify-center bg-white p-4 text-center">
+                <Scissors className="w-16 h-16 mb-6 opacity-20" />
+                <h1 className="text-4xl font-display uppercase mb-2">404 - Nie znaleziono</h1>
+                <p className="text-gray-500 mb-8">Strona, której szukasz, nie istnieje lub została przeniesiona.</p>
+                <Link to="/">
+                  <Button variant="primary">Wróć do strony głównej</Button>
+                </Link>
+              </div>
+            }
+          />
+          <Route
             path="/"
             element={
             <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black p-4 selection:bg-black selection:text-white">
