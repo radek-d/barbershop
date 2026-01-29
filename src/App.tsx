@@ -1,23 +1,34 @@
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import BookingPage from './pages/booking/BookingPage';
-import Dashboard from './pages/dashboard/Dashboard';
-import LoginPage from './pages/auth/LoginPage';
 import { Button } from './components/ui/Button';
 import { Scissors, Clock, Star } from 'lucide-react';
 import './index.css';
 
+// Lazy loading components
+const BookingPage = lazy(() => import('./pages/booking/BookingPage'));
+const Dashboard = lazy(() => import('./pages/dashboard/Dashboard'));
+const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
+
+// Loading fallback
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="w-16 h-1 bg-black animate-pulse"></div>
+  </div>
+);
+
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/booking" element={<BookingPage />} />
-        <Route path="/b/:slug" element={<BookingPage />} />
-        <Route path="/admin" element={<Dashboard />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route
-          path="/"
-          element={
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/b/:slug" element={<BookingPage />} />
+          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/"
+            element={
             <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black p-4">
               <div className="max-w-4xl w-full text-center space-y-12">
                 {/* Hero Section */}
@@ -77,7 +88,8 @@ function App() {
             </div>
           }
         />
-      </Routes>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
