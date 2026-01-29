@@ -156,13 +156,13 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-white p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8 flex justify-between items-end">
-          <div>
-            <h1 className="text-5xl font-display uppercase mb-2">Panel {currentUser?.role === 'admin' ? 'Szefa' : 'Barbera'}</h1>
+        <div className="mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6">
+          <div className="flex-1">
+            <h1 className="text-4xl md:text-5xl font-display uppercase mb-2">Panel {currentUser?.role === 'admin' ? 'Szefa' : 'Barbera'}</h1>
             <div className="w-16 h-1 bg-black mb-4"></div>
             <p className="text-gray-600">Witaj, <span className="font-bold">{currentUser?.fullname || currentUser?.email}</span></p>
           </div>
-          <Button onClick={() => { supabase.auth.signOut(); navigate('/login'); }} variant="outline">
+          <Button onClick={() => { supabase.auth.signOut(); navigate('/login'); }} variant="outline" className="w-full sm:w-auto">
             Wyloguj
           </Button>
         </div>
@@ -171,7 +171,7 @@ export default function Dashboard() {
         <div className="flex gap-2 mb-6 border-b-2 border-black overflow-x-auto">
           <button
             onClick={() => setActiveTab('appointments')}
-            className={`px-6 py-3 font-medium transition-all whitespace-nowrap border-b-2 ${
+            className={`flex-1 sm:flex-none px-4 sm:px-6 py-3 font-medium transition-all whitespace-nowrap border-b-2 ${
               activeTab === 'appointments'
                 ? 'border-black text-black'
                 : 'border-transparent text-gray-600 hover:text-black'
@@ -184,7 +184,7 @@ export default function Dashboard() {
             <>
               <button
                 onClick={() => setActiveTab('schedules')}
-                className={`px-6 py-3 font-medium transition-all whitespace-nowrap border-b-2 ${
+                className={`flex-1 sm:flex-none px-4 sm:px-6 py-3 font-medium transition-all whitespace-nowrap border-b-2 ${
                   activeTab === 'schedules'
                     ? 'border-black text-black'
                     : 'border-transparent text-gray-600 hover:text-black'
@@ -194,7 +194,7 @@ export default function Dashboard() {
               </button>
               <button
                 onClick={() => setActiveTab('services')}
-                className={`px-6 py-3 font-medium transition-all whitespace-nowrap border-b-2 ${
+                className={`flex-1 sm:flex-none px-4 sm:px-6 py-3 font-medium transition-all whitespace-nowrap border-b-2 ${
                   activeTab === 'services'
                     ? 'border-black text-black'
                     : 'border-transparent text-gray-600 hover:text-black'
@@ -204,7 +204,7 @@ export default function Dashboard() {
               </button>
               <button
                 onClick={() => setActiveTab('staff')}
-                className={`px-6 py-3 font-medium transition-all whitespace-nowrap border-b-2 ${
+                className={`flex-1 sm:flex-none px-4 sm:px-6 py-3 font-medium transition-all whitespace-nowrap border-b-2 ${
                   activeTab === 'staff'
                     ? 'border-black text-black'
                     : 'border-transparent text-gray-600 hover:text-black'
@@ -240,17 +240,17 @@ export default function Dashboard() {
                         }`}
                       >
                         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-                          <div>
-                            <div className="flex items-center gap-2 mb-1">
-                              <h3 className="font-semibold text-lg">{apt.client_name}</h3>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-2 mb-1">
+                              <h3 className="font-semibold text-lg truncate">{apt.client_name}</h3>
                               {currentUser?.role === 'admin' && (
-                                <span className="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600">
-                                  Barber: {barbers.find(b => b.id === apt.barber_id)?.fullname || 'Unknown'}
+                                <span className="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600 whitespace-nowrap">
+                                  Barber: {barbers.find(b => b.id === apt.barber_id)?.fullname || 'Nieznany'}
                                 </span>
                               )}
                             </div>
                             <p className="text-sm text-slate-600">{formatPhoneDisplay(apt.client_phone)}</p>
-                            <div className="flex items-center gap-4 mt-2 text-sm text-slate-500">
+                            <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-2 text-sm text-slate-500">
                               <span className="flex items-center gap-1">
                                 <CalendarIcon className="w-4 h-4" />
                                 {format(new Date(apt.start_time), 'd MMM yyyy')}

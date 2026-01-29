@@ -9,7 +9,7 @@ import { format, addMinutes, startOfDay, endOfDay } from 'date-fns';
 import { Button } from '../../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card';
 import { Input } from '../../components/ui/Input';
-import { Clock, User, Phone, CreditCard, CheckCircle2, Scissors } from 'lucide-react';
+import { Clock, User, Phone, CreditCard, CheckCircle2 } from 'lucide-react';
 
 type BookingStep = 'service' | 'barber' | 'datetime' | 'details' | 'checkout';
 
@@ -242,9 +242,9 @@ export default function BookingPage() {
           <h1 className="text-xl font-display uppercase tracking-widest opacity-50">Dziupla</h1>
         </div>
         <div className="mb-8 text-center">
-          <h1 className="text-5xl md:text-6xl font-display uppercase mb-2">Dziupla Barbershop</h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-display uppercase mb-2">Dziupla Barbershop</h1>
           <div className="w-16 h-1 bg-black mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Wybierz usługę i barbera</p>
+          <p className="text-gray-600 font-light text-base sm:text-lg">Rezerwacja wizyty online</p>
         </div>
 
         {bookingError && (
@@ -301,32 +301,27 @@ export default function BookingPage() {
               transition={{ duration: 0.3 }}
             >
               <Card>
-                <CardHeader>
-                  <CardTitle className="text-3xl font-display uppercase">Wybierz Barbera</CardTitle>
+                <CardHeader className="px-4 sm:px-6">
+                  <CardTitle className="font-display uppercase text-2xl sm:text-3xl">Wybierz Barbera</CardTitle>
                 </CardHeader>
-                <CardContent className="grid gap-4">
-                  {barbers.map(barber => (
-                    <button
-                      key={barber.id}
-                      onClick={() => handleBarberSelect(barber)}
-                      className="p-4 border-2 border-black rounded-xl hover:bg-black hover:text-white transition-all text-left flex items-center justify-between group"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-black group-hover:text-black group-hover:bg-white overflow-hidden">
-                          {barber.avatar_url ? (
-                            <img src={barber.avatar_url} alt={barber.fullname || ''} className="w-full h-full object-cover" />
-                          ) : (
-                            <User className="w-6 h-6" />
-                          )}
+                <CardContent className="px-4 sm:px-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {barbers.map(barber => (
+                      <motion.div
+                        key={barber.id}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => handleBarberSelect(barber)}
+                        className="p-6 border-2 border-black rounded-2xl cursor-pointer hover:bg-gray-50 transition-all flex flex-col items-center text-center group"
+                      >
+                        <div className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
+                          <User className="w-8 h-8" />
                         </div>
-                        <div>
-                          <h3 className="font-semibold text-lg">{barber.fullname || barber.email.split('@')[0]}</h3>
-                          <p className="text-sm text-gray-500 group-hover:text-gray-300 capitalize">{barber.role}</p>
-                        </div>
-                      </div>
-                      <Scissors className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </button>
-                  ))}
+                        <h3 className="text-xl font-bold mb-1">{barber.fullname}</h3>
+                        <p className="text-sm text-gray-500 uppercase tracking-widest">{barber.role}</p>
+                      </motion.div>
+                    ))}
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -362,12 +357,12 @@ export default function BookingPage() {
                     {availableSlots.length > 0 ? (
                       <div>
                         <label className="block text-sm font-medium mb-3">Dostępne godziny w dniu {format(selectedDate, 'dd.MM')}:</label>
-                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
+                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-3">
                           {availableSlots.map(slot => (
                             <Button
                               key={slot}
                               variant="outline"
-                              className="h-12 border-black hover:bg-black hover:text-white transition-colors"
+                              className="h-10 sm:h-12 border-black hover:bg-black hover:text-white transition-colors text-sm sm:text-base px-2"
                               onClick={() => handleSlotSelect(slot)}
                             >
                               {slot}

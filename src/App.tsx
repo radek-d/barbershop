@@ -75,7 +75,7 @@ function App() {
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.2 }}
-                      className="text-6xl md:text-8xl lg:text-[10rem] font-display uppercase tracking-tighter leading-[0.85] text-white"
+                      className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-display uppercase tracking-tighter leading-[0.85] text-white"
                     >
                       Dziupla<br/>
                       <span className="text-white/40">Barbershop</span>
@@ -128,7 +128,7 @@ function App() {
                     <Link to="/booking">
                       <Button 
                         size="lg" 
-                        className="text-2xl px-16 py-8 h-auto bg-white text-black hover:bg-gray-200 rounded-full group relative overflow-hidden transition-all shadow-2xl hover:shadow-white/10"
+                        className="text-xl sm:text-2xl px-8 sm:px-16 py-6 sm:py-8 h-auto bg-white text-black hover:bg-gray-200 rounded-full group relative overflow-hidden transition-all shadow-2xl hover:shadow-white/10"
                       >
                         <span className="relative z-10 flex items-center gap-3">
                           Zarezerwuj teraz <Scissors className="w-6 h-6 rotate-90" />
@@ -146,7 +146,7 @@ function App() {
                     <Link to="/dashboard" className="text-sm text-gray-500 hover:text-white transition-colors tracking-widest uppercase">
                       Panel Właściciela
                     </Link>
-                    <div className="flex gap-6 text-gray-500">
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-gray-500 text-center">
                       <span className="text-xs uppercase tracking-tighter">Warszawa, ul. Barbera 12</span>
                       <span className="text-xs uppercase tracking-tighter">Pon - Sob: 09:00 - 20:00</span>
                     </div>
