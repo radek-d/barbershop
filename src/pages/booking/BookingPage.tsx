@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../../lib/supabase';
 import type { Profile, Service, Schedule, Appointment } from '../../types';
@@ -234,6 +234,12 @@ export default function BookingPage() {
   return (
     <div className="min-h-screen bg-white p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <Link to="/" className="text-sm font-medium flex items-center gap-2 hover:underline">
+            ← Strona Główna
+          </Link>
+          <h1 className="text-xl font-display uppercase tracking-widest opacity-50">Dziupla</h1>
+        </div>
         <div className="mb-8 text-center">
           <h1 className="text-5xl md:text-6xl font-display uppercase mb-2">Dziupla Barbershop</h1>
           <div className="w-16 h-1 bg-black mx-auto mb-4"></div>
